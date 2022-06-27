@@ -2,49 +2,58 @@
 #include <stdlib.h>
 
 /**
- * main - function
- * @argc: length of argv
- * @argv: number of argument
- * Return: Always 0
+ * isInteger - checks if s is an integer
+ * @s: string to check
+ * Return: 0 or 1
  */
 
-int main(int argc, char *argv[])
+int isInteger(const char *s)
 {
-	/*Declaring variables*/
-	int position, total, change, aux;
-	int coins[] = {25, 10, 5, 2, 1}; /*Array int*/
+	int i = 0;
 
-	position = total = change = aux = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+/**
+ * main - adds positive numbers
+ * @argc: int
+ * @argv: list
+ * Return: 0
+ */
+
+int main(int argc, char const *argv[])
+{
+	int i = 0, coinUsed = 0, coin = 0;
+	int coins[] = {25, 10, 5, 2, 1};
 
 	if (argc != 2)
 	{
 		printf("Error\n");
 		return (1);
 	}
-	total = atoi(argv[1]); /*Covert str to int*/
-
-	if (total <= 0)
+	if (isInteger(argv[1]))
 	{
-		printf("0\n");
-		return (0);
-	}
-
-	/*Declaring While*/
-
-	while (coins[position] != '\0')
-
-	{
-		if (total >= coins[position])
+		i = atoi(argv[1]);
+		while (i > 0 && coin <= 4)
 		{
-			aux = (total / coins[position])
-				change += aux;
-			total -= coins[position] * aux;
+			if (i >= coins[coin])
+			{
+				i -= coins[coin];
+				coinUsed++;
+			}
+			else
+			{
+				coin++;
+			}
 		}
-
-		position++;
-
 	}
+	printf("%i\n", coinUsed);
 
-	printf("%d\n", change);
 	return (0);
 }
